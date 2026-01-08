@@ -1,0 +1,67 @@
+{
+ "actions": [],
+ "autoname": "field:user",
+ "creation": "2025-12-18 18:32:22.573288",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "user",
+  "enabled",
+  "max_outstanding_limit",
+  "is_blocked",
+  "block_reason"
+ ],
+ "fields": [
+  {
+   "fieldname": "user",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Salesman (User)",
+   "options": "User",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "default": "1",
+   "fieldname": "enabled",
+   "fieldtype": "Check",
+   "label": "Enabled"
+  },
+  {
+   "fieldname": "max_outstanding_limit",
+   "fieldtype": "Currency",
+   "label": "Max Outstanding Limit (SAR)"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_blocked",
+   "fieldtype": "Check",
+   "label": "Blocked"
+  },
+  {
+   "depends_on": "eval:doc.is_blocked",
+   "fieldname": "block_reason",
+   "fieldtype": "Small Text",
+   "label": "Block Reason"
+  }
+ ],
+ "links": [],
+ "modified": "2025-12-18 19:13:18.027042",
+ "modified_by": "Administrator",
+ "module": "Temp Credit Control",
+ "name": "Temp Credit Salesman Policy",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "read": 1,
+   "role": "Sales Manager",
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

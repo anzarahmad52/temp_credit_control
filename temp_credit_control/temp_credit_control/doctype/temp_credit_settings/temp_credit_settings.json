@@ -1,0 +1,156 @@
+{
+ "actions": [],
+ "creation": "2025-12-18 19:23:38.383348",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "enabled",
+  "section_customer",
+  "default_customer_limit",
+  "column_break_tnfm",
+  "default_max_unpaid_invoices",
+  "section_warehouse",
+  "enable_warehouse_limit",
+  "column_break_guqr",
+  "default_warehouse_limit",
+  "section_salesman",
+  "enable_salesman_limit",
+  "column_break_eorj",
+  "default_salesman_limit",
+  "section_identification",
+  "customer_tc_fieldname",
+  "temp_credit_value",
+  "section_ui",
+  "show_popup_on_allow"
+ ],
+ "fields": [
+  {
+   "default": "1",
+   "fieldname": "enabled",
+   "fieldtype": "Check",
+   "label": "Enable Temp Credit Control"
+  },
+  {
+   "fieldname": "section_customer",
+   "fieldtype": "Section Break",
+   "label": "Customer Limits"
+  },
+  {
+   "default": "700",
+   "fieldname": "default_customer_limit",
+   "fieldtype": "Currency",
+   "label": "Default Customer Limit (SAR)"
+  },
+  {
+   "default": "3",
+   "fieldname": "default_max_unpaid_invoices",
+   "fieldtype": "Int",
+   "label": "Default Max Unpaid Invoices"
+  },
+  {
+   "fieldname": "section_warehouse",
+   "fieldtype": "Section Break",
+   "label": "Warehouse Limits"
+  },
+  {
+   "default": "1",
+   "fieldname": "enable_warehouse_limit",
+   "fieldtype": "Check",
+   "label": "Enable Warehouse Pool Limit"
+  },
+  {
+   "default": "35000",
+   "fieldname": "default_warehouse_limit",
+   "fieldtype": "Currency",
+   "label": "Default Warehouse Limit (SAR)"
+  },
+  {
+   "fieldname": "section_salesman",
+   "fieldtype": "Section Break",
+   "label": "Salesman Limits"
+  },
+  {
+   "default": "0",
+   "fieldname": "enable_salesman_limit",
+   "fieldtype": "Check",
+   "label": "Enable Salesman Limit"
+  },
+  {
+   "default": "0",
+   "fieldname": "default_salesman_limit",
+   "fieldtype": "Currency",
+   "label": "Default Salesman Limit (SAR)"
+  },
+  {
+   "fieldname": "section_identification",
+   "fieldtype": "Section Break",
+   "label": "Temp Credit Identification"
+  },
+  {
+   "default": "custom_payment_type",
+   "fieldname": "customer_tc_fieldname",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "in_list_view": 1,
+   "label": "Customer Temp Credit Fieldname",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "default": "Temp Credit",
+   "fieldname": "temp_credit_value",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "in_list_view": 1,
+   "label": "Temp Credit Field Value",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_ui",
+   "fieldtype": "Section Break",
+   "label": "UI Options"
+  },
+  {
+   "default": "1",
+   "fieldname": "show_popup_on_allow",
+   "fieldtype": "Check",
+   "label": "Show Popup When Allowed",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_tnfm",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_guqr",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_eorj",
+   "fieldtype": "Column Break"
+  }
+ ],
+ "issingle": 1,
+ "links": [],
+ "modified": "2025-12-21 12:08:54.760437",
+ "modified_by": "Administrator",
+ "module": "Temp Credit Control",
+ "name": "Temp Credit Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "read": 1,
+   "role": "System Manager",
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -43,6 +43,9 @@ app_license = "mit"
 # page_js = {"page" : "public/js/file.js"}
 
 # include js in doctype views
+doctype_js = {
+    "Sales Invoice": "public/js/sales_invoice_temp_credit.js"
+}
 # doctype_js = {"doctype" : "public/js/doctype.js"}
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
@@ -136,6 +139,13 @@ app_license = "mit"
 # Document Events
 # ---------------
 # Hook on document methods and events
+
+doc_events = {
+    "Sales Invoice": {
+        "validate": "temp_credit_control.services.temp_credit_validator.apply_temp_credit_rules",
+        "before_submit": "temp_credit_control.services.temp_credit_validator.apply_temp_credit_rules",
+    }
+}
 
 # doc_events = {
 # 	"*": {
