@@ -14,13 +14,7 @@ frappe.query_reports['Temp Credit Status'] = {
       fieldtype: 'Select',
       reqd: 1,
       default: 'Last 30 Days',
-      options: [
-        'Today',
-        'Last 30 Days',
-        'Last 60 Days',
-        'Last 90 Days',
-        'All',
-      ],
+      options: ['Today', 'Last 30 Days', 'Last 60 Days', 'Last 90 Days', 'All'],
     },
     {
       fieldname: 'customer_group',
@@ -43,6 +37,23 @@ frappe.query_reports['Temp Credit Status'] = {
       options: 'User',
       reqd: 0,
     },
+
+    // ✅ Optional filters (useful for customer-wise view)
+    {
+      fieldname: 'customer',
+      label: __('Customer'),
+      fieldtype: 'Link',
+      options: 'Customer',
+      reqd: 0,
+    },
+    {
+      fieldname: 'territory',
+      label: __('Territory'),
+      fieldtype: 'Link',
+      options: 'Territory',
+      reqd: 0,
+    },
+
     {
       fieldname: 'summary_mode',
       label: __('Summary Mode'),
@@ -50,6 +61,14 @@ frappe.query_reports['Temp Credit Status'] = {
       options: 'Salesman Wise\nCustomer Wise',
       default: 'Salesman Wise',
       reqd: 1,
+    },
+
+    // ✅ New checkbox
+    {
+      fieldname: 'show_only_over_limit',
+      label: __('Show Only Over Limit'),
+      fieldtype: 'Check',
+      default: 0,
     },
   ],
 
@@ -80,6 +99,13 @@ frappe.query_reports['Temp Credit Status'] = {
         value = `<span style="color:#f0ad4e; font-weight:600">${__('Temp Credit')}</span>`;
       } else {
         value = `<span style="color:#5cb85c; font-weight:600">${__('Credit')}</span>`;
+      }
+    }
+
+    // Optional: highlight remaining_credit if negative (in case you add it later)
+    if (column.fieldname === 'remaining_credit') {
+      if (flt(data.remaining_credit) < 0) {
+        value = `<span style="color:#d9534f; font-weight:600">${value}</span>`;
       }
     }
 

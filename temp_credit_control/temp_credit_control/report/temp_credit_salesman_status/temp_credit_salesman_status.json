@@ -1,0 +1,9 @@
+{
+  "doctype": "Report",
+  "name": "Temp Credit Salesman Status",
+  "ref_doctype": "Sales Invoice",
+  "report_type": "Script Report",
+  "is_standard": "Yes",
+  "module": "Temp Credit Control",
+  "disabled": 0
+}
