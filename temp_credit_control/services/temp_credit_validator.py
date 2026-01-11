@@ -184,12 +184,26 @@ def _get_settings():
 
 
 def _get_customer_policy(customer):
+    customer = (customer or "").strip()
+    if not customer:
+        return None
+    pol = frappe.db.get_value(
+        "Temp Credit Customer Policy",
+        customer,  # docname
+        ["enabled", "credit_limit_override", "max_unpaid_invoices_override",
+         "is_blacklisted", "blacklist_reason"],
+        as_dict=True,
+    )
+    if pol:
+        return pol
     return frappe.db.get_value(
         "Temp Credit Customer Policy",
         {"customer": customer},
-        ["enabled", "credit_limit_override", "max_unpaid_invoices_override", "is_blacklisted", "blacklist_reason"],
+        ["enabled", "credit_limit_override", "max_unpaid_invoices_override",
+         "is_blacklisted", "blacklist_reason"],
         as_dict=True,
     )
+
 
 
 def _get_salesman_policy(user):

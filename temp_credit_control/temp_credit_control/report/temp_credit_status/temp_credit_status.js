@@ -1,3 +1,5 @@
+/* temp_credit_status.js */
+
 frappe.query_reports['Temp Credit Status'] = {
   filters: [
     {
@@ -37,8 +39,6 @@ frappe.query_reports['Temp Credit Status'] = {
       options: 'User',
       reqd: 0,
     },
-
-    // ✅ Optional filters (useful for customer-wise view)
     {
       fieldname: 'customer',
       label: __('Customer'),
@@ -53,7 +53,6 @@ frappe.query_reports['Temp Credit Status'] = {
       options: 'Territory',
       reqd: 0,
     },
-
     {
       fieldname: 'summary_mode',
       label: __('Summary Mode'),
@@ -62,8 +61,6 @@ frappe.query_reports['Temp Credit Status'] = {
       default: 'Salesman Wise',
       reqd: 1,
     },
-
-    // ✅ New checkbox
     {
       fieldname: 'show_only_over_limit',
       label: __('Show Only Over Limit'),
@@ -73,17 +70,30 @@ frappe.query_reports['Temp Credit Status'] = {
   ],
 
   formatter: function (value, row, column, data, default_formatter) {
-    // For HTML link column, return raw HTML (clickable)
-    if (column.fieldname === 'open_invoices_link' && data && data.open_invoices_link) {
-      return data.open_invoices_link;
-    }
-
     value = default_formatter(value, row, column, data);
     if (!data) return value;
 
-    // Highlight if used > limit
-    if (column.fieldname === 'used_credit') {
-      if (flt(data.used_credit) > flt(data.credit_limit)) {
+    const used = flt(data.customer_used_credit);
+    const limit = flt(data.credit_limit);
+    const remaining = flt(data.remaining_credit);
+
+    // ✅ Invoice Outstanding red if customer is over limit (used > limit)
+    if (column.fieldname === 'invoice_outstanding') {
+      if (limit > 0 && used > limit) {
+        value = `<span style="color:#d9534f; font-weight:600">${value}</span>`;
+      }
+    }
+
+    // ✅ Remaining Limit red if negative
+    if (column.fieldname === 'remaining_credit') {
+      if (remaining < 0) {
+        value = `<span style="color:#d9534f; font-weight:600">${value}</span>`;
+      }
+    }
+
+    // ✅ Also highlight customer_used_credit if over limit
+    if (column.fieldname === 'customer_used_credit') {
+      if (limit > 0 && used > limit) {
         value = `<span style="color:#d9534f; font-weight:600">${value}</span>`;
       }
     }
@@ -99,13 +109,6 @@ frappe.query_reports['Temp Credit Status'] = {
         value = `<span style="color:#f0ad4e; font-weight:600">${__('Temp Credit')}</span>`;
       } else {
         value = `<span style="color:#5cb85c; font-weight:600">${__('Credit')}</span>`;
-      }
-    }
-
-    // Optional: highlight remaining_credit if negative (in case you add it later)
-    if (column.fieldname === 'remaining_credit') {
-      if (flt(data.remaining_credit) < 0) {
-        value = `<span style="color:#d9534f; font-weight:600">${value}</span>`;
       }
     }
 
